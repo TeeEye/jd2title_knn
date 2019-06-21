@@ -51,8 +51,9 @@ def run():
     print('Converting to TF-IDF...')
     tfidf, tv = text2tfidf(cut_jd)
     print('Done with tfidf size: ', tfidf.shape)
+    labels = np.array(list(jds['standard_title']))
     with open(TFIDF_PATH, 'wb') as f:
-        pickle.dump((tfidf, tv), f)
+        pickle.dump((tfidf, labels, tv), f)
     print('All done!')
 
 
