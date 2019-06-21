@@ -28,7 +28,7 @@ def run():
     print('Preprocess start')
     with open(DATA_PATH, 'rb') as data_file:
         jds = pickle.load(data_file)
-        jds = jds.head(100)
+        jds = jds.head(10000)
     jds['combined'] = jds['job_title'] + jds['job_description']
     del jds['job_title']
     del jds['job_description']
@@ -38,7 +38,9 @@ def run():
     trie = TrieTree(SKILL_PATH)
 
     cut_jd = []
-    for idx, row in jds.iterrows():
+    idx = 0
+    for _, row in jds.iterrows():
+        idx += 1
         cut = trie.cut(row['combined'])
         cut_jd.append(' '.join(cut))
         if idx % 1000 == 0 or idx == len(jds)-1:
