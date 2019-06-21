@@ -4,6 +4,9 @@
 """
 import os
 import sys
+
+sys.path.append("..")
+
 import pickle
 import numpy as np
 from config import *
@@ -25,6 +28,7 @@ def run():
     print('Preprocess start')
     with open(DATA_PATH, 'rb') as data_file:
         jds = pickle.load(data_file)
+        jds = jds.head(100)
     jds['combined'] = jds['job_title'] + jds['job_description']
     del jds['job_title']
     del jds['job_description']
